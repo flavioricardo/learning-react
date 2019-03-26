@@ -22,7 +22,9 @@ class Resumo extends Component {
     }
 
     componentDidMount() {
-        fetch("http://www.devup.com.br/php/api-dashboard/api/resumo").then(
+        // Roda assim que o componente for carregado, antes do render()
+        fetch('http://www.devup.com.br/php/api-dashboard/api/resumo').then(
+            // Transforma o retorno num JSON
             resultado => resultado.json().then(
                 dados => this.setState(dados)
             )
@@ -39,9 +41,7 @@ class Resumo extends Component {
                         <div className="row">
                             <div className="col">
                                 <div className="card mt-2 text-center">
-                                    <div className="card-header">
-                                        30 dias anteriores
-                                    </div>
+                                    <div className="card-header">30 dias anteriores</div>
                                     <div className="card-body">
                                         { this.state.consultas.consultas_30dias_anteiores }
                                     </div>
@@ -49,9 +49,7 @@ class Resumo extends Component {
                             </div>
                             <div className="col">
                                 <div className="card mt-2 text-center">
-                                    <div className="card-header">
-                                        Próximos 30 dias
-                                    </div>
+                                    <div className="card-header">Próximos 30 dias</div>
                                     <div className="card-body">
                                         { this.state.consultas.consultas_30dias_posteriores }
                                     </div>
@@ -64,9 +62,7 @@ class Resumo extends Component {
                         <div className="row">
                             <div className="col">
                                 <div className="card mt-2 text-center">
-                                    <div className="card-header">
-                                        30 dias anteriores
-                                    </div>
+                                    <div className="card-header">30 dias anteriores</div>
                                     <div className="card-body">
                                         { this.state.faturamento.anterior.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) }
                                     <span className={ "badge ml-1 " + (this.state.faturamento.anterior.comparativo > 0 ? "badge-success" : "badge-danger") }>
@@ -77,9 +73,7 @@ class Resumo extends Component {
                             </div>
                             <div className="col">
                                 <div className="card mt-2 text-center">
-                                    <div className="card-header">
-                                        Próximos 30 dias
-                                    </div>
+                                    <div className="card-header">Próximos 30 dias</div>
                                     <div className="card-body">
                                         { this.state.faturamento.previsao.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }) }
                                         <span className={ "badge ml-1 " + (this.state.faturamento.previsao.comparativo > 0 ? "badge-success" : "badge-danger") }>
@@ -96,4 +90,5 @@ class Resumo extends Component {
     }
 }
 
+// Exporta o componente
 export default Resumo;
