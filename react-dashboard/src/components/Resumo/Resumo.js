@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class Resumo extends Component {
+    // Cria modelo igual ao retorno da API
     constructor(props) {
         super(props);
         this.state = {
