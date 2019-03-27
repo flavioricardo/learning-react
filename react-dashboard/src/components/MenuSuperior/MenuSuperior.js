@@ -10,6 +10,8 @@ class MenuSuperior extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav mr-auto">
+                        <li className="nav-item"><a className="nav-link" href="/consultas">Consultas</a></li>
+                        <li className="nav-item"><a className="nav-link" href="/faturamento">Faturamento</a></li>
                     </ul>
                 </div>
             </nav>
