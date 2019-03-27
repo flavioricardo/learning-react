@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { URL_API } from '../../services/base';
+import { consultarFaturamento } from '../../services/faturamento';
 
 class Faturamento extends Component {
     // Cria modelo igual ao retorno da API
@@ -12,10 +12,8 @@ class Faturamento extends Component {
 
     componentDidMount() {
         // Roda assim que o componente for carregado, antes do render()
-        fetch(URL_API + '/faturamento').then(
-            resultado => resultado.json().then(
-                dados => this.setState(dados)
-            )
+        consultarFaturamento().then(
+            dados => this.setState(dados)
         );
     }
 
