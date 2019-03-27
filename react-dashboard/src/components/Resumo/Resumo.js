@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { consultarResumo } from '../../services/resumo';
 
 class Resumo extends Component {
     // Cria modelo igual ao retorno da API
@@ -24,11 +25,8 @@ class Resumo extends Component {
 
     componentDidMount() {
         // Roda assim que o componente for carregado, antes do render()
-        fetch('http://www.devup.com.br/php/api-dashboard/api/resumo').then(
-            // Transforma o retorno num JSON
-            resultado => resultado.json().then(
-                dados => this.setState(dados)
-            )
+        consultarResumo().then(
+            dados => this.setState(dados)
         );
     }
 
