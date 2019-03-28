@@ -11,6 +11,9 @@ class MenuSuperior extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav mr-auto">
+                        <li className="nav-item"><Link to="/" className="nav-link">Home</Link></li>
+                        <li className="nav-item"><Link to="/autores" className="nav-link">Autores</Link></li>
+                        <li className="nav-item"><Link to="/livros" className="nav-link">Livros</Link></li>
                     </ul>
                 </div>
             </nav>
