@@ -14,6 +14,10 @@ class App extends Component {
 		};
 		// Associa o this do método submitForm ao this do React
 		this.submitForm = this.submitForm.bind(this);
+		// O mesmo para demais funções
+		this.setNome = this.setNome.bind(this);
+		this.setEmail = this.setEmail.bind(this);
+		this.setSenha = this.setSenha.bind(this);
 	}
 
 	// Função só é chamada depois da primeira renderização
@@ -46,9 +50,21 @@ class App extends Component {
 				email: this.state.email,
 				senha: this.state.senha
 			})
-		}).then(function(resultados) {
-			console.log(resultados.statusText);
-		})
+		}).then((response) => {
+			this.setState({ lista : response.json() });
+        });
+	}
+
+	setNome(event) {
+		this.setState({nome: event.target.value});
+	}
+
+	setEmail(event) {
+		this.setState({email: event.target.value});
+	}
+
+	setSenha(event) {
+		this.setState({senha: event.target.value});
 	}
 
 	render() {
