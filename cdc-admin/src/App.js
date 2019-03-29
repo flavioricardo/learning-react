@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import MenuSuperior from './components/MenuSuperior/MenuSuperior';
+import InputCustomizado from './components/Elementos/InputCustomizado';
+import Botao from './components/Elementos/Botao';
 
 class App extends Component {
 
@@ -78,19 +80,10 @@ class App extends Component {
 					<div className="row">
 						<div className="col">
 							<form onSubmit={ this.submitForm }>
-								<div className="form-group">
-									<label htmlFor="nome">Nome</label>
-									<input type="text" className="form-control" id="nome" placeholder="Nome" value={ this.state.nome } onChange={ this.setNome } />
-								</div>
-								<div className="form-group">
-									<label htmlFor="email">E-mail</label>
-									<input type="email" className="form-control" id="email" placeholder="E-mail" value={ this.state.email } onChange={ this.setEmail } />
-								</div>
-								<div className="form-group">
-									<label htmlFor="senha">Senha</label>
-									<input type="password" className="form-control" id="senha" placeholder="Senha" value={ this.state.senha } onChange={ this.setSenha } />
-								</div>
-								<button type="submit" className="btn btn-primary">Enviar</button>
+								<InputCustomizado id="nome" type="text" name="nome" value={ this.state.nome } onChange={ this.setNome } label="Nome" />
+								<InputCustomizado id="email" type="email" name="email" value={ this.state.email } onChange={ this.setEmail } label="E-mail" />
+								<InputCustomizado id="senha" type="password" name="senha" value={ this.state.senha } onChange={ this.setSenha } label="Senha" />
+								<Botao type="submit" label="Cadastrar" />
 							</form>
 						</div>
 					</div>
