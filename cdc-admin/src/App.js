@@ -50,9 +50,11 @@ class App extends Component {
 				email: this.state.email,
 				senha: this.state.senha
 			})
-		}).then((response) => {
-			this.setState({ lista : response.json() });
-        });
+		}).then(resultados => {
+			resultados.json().then(dados => {
+				this.setState({ lista : dados })
+			})
+		})
 	}
 
 	setNome(event) {
