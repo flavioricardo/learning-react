@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import InputCustomizado from '../Elementos/InputCustomizado';
 import Botao from '../Elementos/Botao';
+// PubSub cria um publisher e um subscriber para atualizar o estado da lista
+import PubSub from 'pubsub-js';
 
 class AutorFormulario extends Component {
 
@@ -34,7 +36,10 @@ class AutorFormulario extends Component {
 			})
 		}).then(resultados => {
 			resultados.json().then(dados => {
-                this.props.callbackAtualizaLista(dados);
+                // Criando um tópico que avisa que a lista foi atualizada
+                PubSub.publish('atualiza-lista-autores', dados);
+                // Usando uma função de callback para atualizar a lista
+                // this.props.callbackAtualizaLista(dados);
 			})
 		})
 	}
@@ -108,7 +113,7 @@ class AutorBox extends Component {
 		this.state = {
 			lista : []
         };
-        this.atualizaLista = this.atualizaLista.bind(this);
+        // this.atualizaLista = this.atualizaLista.bind(this);
 	}
 
 	// Função só é chamada depois da primeira renderização
@@ -126,18 +131,25 @@ class AutorBox extends Component {
 		// 	success : function(resultados) {
 		// 		this.setState({ lista: resultados });
 		// 	}.bind(this)
-		// });
+        // });
+
+        //Se inscrevendo no tópico criado que atualiza a lista
+        PubSub.subscribe('atualiza-lista-autores', function(topico, novaLista) {
+            this.setState({ lista : novaLista })
+        }.bind(this));
     }
 
-    atualizaLista(novaLista) {
-        this.setState({ lista : novaLista });
-    }
+    // Função de callback não é mais necessária
+    // atualizaLista(novaLista) {
+    //     this.setState({ lista : novaLista });
+    // }
 
     render() {
         return(
             <div className="container">
                 <h2 className="mt-2">Cadastro de Autores</h2>
-                <AutorFormulario callbackAtualizaLista={ this.atualizaLista } />
+                <AutorFormulario />
+                {/* <AutorFormulario callbackAtualizaLista={ this.atualizaLista } /> */}
                 <AutorTabela lista={ this.state.lista } />
             </div>
         );
