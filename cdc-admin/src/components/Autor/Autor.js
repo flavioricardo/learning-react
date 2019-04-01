@@ -3,6 +3,7 @@ import InputCustomizado from '../Elementos/InputCustomizado';
 import Botao from '../Elementos/Botao';
 // PubSub cria um publisher e um subscriber para atualizar o estado da lista
 import PubSub from 'pubsub-js';
+import ErrorHandler from '../../ultils/ErrorHandler';
 
 class AutorFormulario extends Component {
 
@@ -35,13 +36,26 @@ class AutorFormulario extends Component {
 				senha: this.state.senha
 			})
 		}).then(resultados => {
-			resultados.json().then(dados => {
-                // Criando um tópico que avisa que a lista foi atualizada
-                PubSub.publish('atualiza-lista-autores', dados);
-                // Usando uma função de callback para atualizar a lista
-                // this.props.callbackAtualizaLista(dados);
-			})
-		})
+            if (resultados.status === 200) {
+                resultados.json().then(dados => {
+                    // Criando um tópico que avisa que a lista foi atualizada
+                    PubSub.publish('atualiza-lista-autores', dados);
+                    this.setState({
+                        nome : '',
+                        email : '',
+                        senha : ''
+                    })
+                    PubSub.unsubscribe('validation');
+                    // Usando uma função de callback para atualizar a lista
+                    // this.props.callbackAtualizaLista(dados);
+                })
+            } else if (resultados.status === 400) {
+                // Tratando erros
+                new ErrorHandler().showErrors(resultados);
+            }
+		}).catch(erro => {
+            console.log(erro);
+        });
 	}
 
 	setNome(event) {
