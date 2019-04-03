@@ -16,6 +16,10 @@ class InputCustomizado extends Component {
                 this.setState({ validation : error })
             }
         }.bind(this));
+
+        PubSub.subscribe('clear-validation', function(topico) {
+            this.setState({ validation : '' })
+        }.bind(this));
     }
 
     render() {

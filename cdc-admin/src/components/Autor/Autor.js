@@ -45,7 +45,8 @@ class AutorFormulario extends Component {
                         email : '',
                         senha : ''
                     })
-                    PubSub.unsubscribe('validation');
+                    // Limpando as mensagens de erro
+                    PubSub.publish('clear-validation', {});
                     // Usando uma função de callback para atualizar a lista
                     // this.props.callbackAtualizaLista(dados);
                 })
