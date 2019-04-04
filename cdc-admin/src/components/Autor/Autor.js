@@ -10,7 +10,6 @@ class AutorFormulario extends Component {
     constructor(props) {
 		super(props);
 		this.state = {
-			lista : [],
 			nome : '',
 			email : '',
 			senha : ''
@@ -103,7 +102,7 @@ class AutorTabela extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.lista.map(function(autor, indice){
+                                this.props.autores.map(function(autor, indice){
                                     return (
                                         <tr key={ indice }>
                                             <td>{ autor.nome }</td>
@@ -126,7 +125,7 @@ class AutorBox extends Component {
     constructor(props) {
 		super(props);
 		this.state = {
-			lista : []
+			autores : []
         };
         // this.atualizaLista = this.atualizaLista.bind(this);
 	}
@@ -135,7 +134,7 @@ class AutorBox extends Component {
 	componentDidMount() {
 		fetch('http://localhost:8080/api/autores').then(
 			resultados => resultados.json().then(
-				lista => this.setState({ lista })
+				autores => this.setState({ autores })
 			)
 		)
 
@@ -150,7 +149,7 @@ class AutorBox extends Component {
 
         //Se inscrevendo no tópico criado que atualiza a lista
         PubSub.subscribe('atualiza-lista-autores', function(topico, novaLista) {
-            this.setState({ lista : novaLista })
+            this.setState({ autores : novaLista })
         }.bind(this));
     }
 
@@ -165,7 +164,7 @@ class AutorBox extends Component {
                 <h2 className="mt-2">Cadastro de Autores</h2>
                 <AutorFormulario />
                 {/* <AutorFormulario callbackAtualizaLista={ this.atualizaLista } /> */}
-                <AutorTabela lista={ this.state.lista } />
+                <AutorTabela autores={ this.state.autores } />
             </div>
         );
     }
