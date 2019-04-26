@@ -4,6 +4,7 @@ import MenuSuperior from './components/MenuSuperior/MenuSuperior';
 import Resumo from './components/Resumo/Resumo';
 import Consultas from './components/Consultas/Consultas';
 import Faturamento from './components/Faturamento/Faturamento';
+import NotFound from './components/NotFound'
 import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
 								<Route path="/" exact component={Resumo} />
 								<Route path="/consultas" component={Consultas} />
 								<Route path="/faturamento" component={Faturamento} />
+								<Route path="*" component={NotFound} />
 							</Switch>
 						</div>
 					</div>
