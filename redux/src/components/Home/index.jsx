@@ -2,12 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actions from '../../actions/acoes'
 
-
 class Home extends Component {
 
-
     render(){
-
         return(
             <div>
                 <h1>Home Page</h1>
@@ -18,10 +15,11 @@ class Home extends Component {
                 <br />
                 <h1>{this.props.text}</h1>
                 <br />
-                <input type="text" onChange={event=> this.props.addText(event)} /> 
+                <input type="text" onChange={event=> this.props.addText(event)} />
             </div>
         )
     }
+
 }
 
 const mapStateToProps = state =>({
